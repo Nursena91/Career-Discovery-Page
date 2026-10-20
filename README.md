@@ -84,6 +84,24 @@ pip install -r requirements.txt
 uvicorn app.main:app --reload
 ```
 
+## Ortam değişkenleri
+
+Canlı kaynakları (public API) kontrollü açmak için `backend/.env` kullanın:
+
+```env
+ENABLE_LIVE_SOURCES=false
+REMOTIVE_API_URL=https://remotive.com/api/remote-jobs
+SOURCE_REQUEST_TIMEOUT_SECONDS=8
+```
+
+Not: Varsayılan olarak canlı kaynaklar kapalıdır. Bu, geliştirme sırasında endpointin dış kaynak hatalarından etkilenmemesini sağlar.
+
+## Git akışı
+
+- `main`: stabil branch
+- `develop`: aktif geliştirme branch'i
+- yeni işler için `feature/*` branch açıp PR ile `develop`a merge edin
+
 ## Geliştirme notları
 
 - Kaynak erişimi ve kalıcı veri toplanması için etki alanı bazlı modüler yapı kullanılacak.
