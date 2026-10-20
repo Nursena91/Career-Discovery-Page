@@ -27,3 +27,8 @@ def search_jobs(payload: JobSearchRequest):
         limit=payload.limit,
     )
     return {"jobs": [job.model_dump() for job in jobs]}
+
+
+@router.get("/sources/health")
+def source_health():
+    return {"sources": JobSourceManager.get_source_health()}

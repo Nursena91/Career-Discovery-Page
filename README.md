@@ -102,6 +102,17 @@ Not: Varsayılan olarak canlı kaynaklar kapalıdır. Bu, geliştirme sırasınd
 - `develop`: aktif geliştirme branch'i
 - yeni işler için `feature/*` branch açıp PR ile `develop`a merge edin
 
+## Mevcut API endpointleri
+
+- `GET /health`
+- `POST /jobs/search`
+- `GET /jobs/sources/health` (adapter başarı/hata/latency özeti)
+
+## Normalization notu
+
+- `posted_at` alanı UTC ISO formatına normalize edilir (örnek: `2026-10-20T00:00:00Z`).
+- `description` alanı HTML ve gereksiz boşluklardan temizlenir.
+
 ## Geliştirme notları
 
 - Kaynak erişimi ve kalıcı veri toplanması için etki alanı bazlı modüler yapı kullanılacak.
