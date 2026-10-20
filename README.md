@@ -101,12 +101,12 @@ Not: Varsayılan olarak canlı kaynaklar kapalıdır. Bu, geliştirme sırasınd
 
 - `main`: stabil branch
 - `develop`: aktif geliştirme branch'i
-- yeni işler için `feature/*` branch açıp PR ile `develop`a merge edin
+- mevcut takım akışı: doğrudan `develop` üzerinde geliştirme + düzenli `develop -> main` merge
 
 ## Mevcut API endpointleri
 
 - `GET /health`
-- `POST /jobs/search`
+- `POST /jobs/search` (sonuçları döner ve veritabanına kaydeder, `inserted_count` üretir)
 - `GET /jobs/sources/health` (adapter başarı/hata/latency özeti)
 
 ## Normalization notu
@@ -119,6 +119,20 @@ Not: Varsayılan olarak canlı kaynaklar kapalıdır. Bu, geliştirme sırasınd
 - Dedupe anahtarı önce normalize edilmiş `source_url`, yoksa içerik hash'i ile üretilir.
 - SQLAlchemy `Job` modeli ve repository katmanı eklidir.
 - Uygulama startup'ta tablo oluşturma (`init_db`) adımı çalıştırır.
+
+## Migration (Alembic)
+
+```bash
+cd backend
+alembic upgrade head
+```
+
+Yeni migration üretmek için:
+
+```bash
+cd backend
+alembic revision -m "your message"
+```
 
 ## Geliştirme notları
 

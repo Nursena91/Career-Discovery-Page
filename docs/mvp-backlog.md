@@ -26,8 +26,8 @@
 ## Milestone 4 — Data Layer
 
 - [x] PostgreSQL models (SQLAlchemy)
-- [ ] Migrations (Alembic)
-- [ ] Save pipeline (`raw -> normalized -> deduped`)
+- [x] Migrations (Alembic)
+- [x] Save pipeline (`raw -> normalized -> deduped`)
 
 ## Milestone 5 — Product API
 

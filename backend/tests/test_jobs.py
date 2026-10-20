@@ -11,6 +11,8 @@ def test_search_jobs_returns_results():
 
     payload = response.json()
     assert "jobs" in payload
+    assert "inserted_count" in payload
+    assert isinstance(payload["inserted_count"], int)
     assert len(payload["jobs"]) >= 1
     assert payload["jobs"][0]["posted_at"].endswith("Z")
 

@@ -1,6 +1,9 @@
-from fastapi import APIRouter
+from fastapi import APIRouter, Depends
+from sqlalchemy.orm import Session
 
 from app.config import settings
+from app.db.session import get_db
+from app.repositories.job_repository import JobRepository
 from app.schemas.job import JobSearchRequest
 from app.services.job_source import DemoSourceAdapter, JobSourceManager, RemotiveSourceAdapter
 
@@ -8,7 +11,7 @@ router = APIRouter(prefix="/jobs", tags=["jobs"])
 
 
 @router.post("/search")
-def search_jobs(payload: JobSearchRequest):
+def search_jobs(payload: JobSearchRequest, db: Session = Depends(get_db)):
     adapters = [DemoSourceAdapter()]
     if settings.enable_live_sources:
         adapters.append(
@@ -26,7 +29,13 @@ def search_jobs(payload: JobSearchRequest):
         work_mode=payload.work_mode,
         limit=payload.limit,
     )
-    return {"jobs": [job.model_dump() for job in jobs]}
+    repository = JobRepository(db)
+    inserted_count = repository.save_many(jobs)
+
+    return {
+        "jobs": [job.model_dump() for job in jobs],
+        "inserted_count": inserted_count,
+    }
 
 
 @router.get("/sources/health")
