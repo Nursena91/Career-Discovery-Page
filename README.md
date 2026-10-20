@@ -92,6 +92,7 @@ Canlı kaynakları (public API) kontrollü açmak için `backend/.env` kullanın
 ENABLE_LIVE_SOURCES=false
 REMOTIVE_API_URL=https://remotive.com/api/remote-jobs
 SOURCE_REQUEST_TIMEOUT_SECONDS=8
+DATABASE_URL=sqlite:///./career_discovery.db
 ```
 
 Not: Varsayılan olarak canlı kaynaklar kapalıdır. Bu, geliştirme sırasında endpointin dış kaynak hatalarından etkilenmemesini sağlar.
@@ -112,6 +113,12 @@ Not: Varsayılan olarak canlı kaynaklar kapalıdır. Bu, geliştirme sırasınd
 
 - `posted_at` alanı UTC ISO formatına normalize edilir (örnek: `2026-10-20T00:00:00Z`).
 - `description` alanı HTML ve gereksiz boşluklardan temizlenir.
+
+## Dedupe ve veri katmanı
+
+- Dedupe anahtarı önce normalize edilmiş `source_url`, yoksa içerik hash'i ile üretilir.
+- SQLAlchemy `Job` modeli ve repository katmanı eklidir.
+- Uygulama startup'ta tablo oluşturma (`init_db`) adımı çalıştırır.
 
 ## Geliştirme notları
 

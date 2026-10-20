@@ -25,7 +25,7 @@
 
 ## Milestone 4 — Data Layer
 
-- [ ] PostgreSQL models (SQLAlchemy)
+- [x] PostgreSQL models (SQLAlchemy)
 - [ ] Migrations (Alembic)
 - [ ] Save pipeline (`raw -> normalized -> deduped`)
 
@@ -46,6 +46,6 @@
 ## Suggested first issues
 
 1. Adapter error telemetry (`source`, `latency`, `error_type`) ✅
-2. Job dedupe hash helper module
-3. SQLAlchemy `Job` model and repository
+2. Job dedupe hash helper module ✅
+3. SQLAlchemy `Job` model and repository ✅
 4. Add `GET /jobs/sources/health` endpoint ✅

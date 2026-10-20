@@ -8,6 +8,7 @@ class Settings(BaseSettings):
     enable_live_sources: bool = False
     remotive_api_url: str = "https://remotive.com/api/remote-jobs"
     source_request_timeout_seconds: float = 8.0
+    database_url: str = "sqlite:///./career_discovery.db"
 
     model_config = SettingsConfigDict(env_file=".env")
 

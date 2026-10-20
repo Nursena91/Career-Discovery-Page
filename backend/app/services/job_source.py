@@ -10,6 +10,7 @@ import re
 import httpx
 
 from app.schemas.job import EmploymentType, JobRecord, WorkMode
+from app.services.dedupe import build_job_dedupe_key
 
 
 class SourceAdapter(ABC):
@@ -267,7 +268,7 @@ class JobSourceManager:
                 continue
 
             for job in jobs:
-                dedupe_key = (job.source_url or f"{job.source}:{job.id}").strip().lower()
+                dedupe_key = build_job_dedupe_key(job)
                 if dedupe_key in seen:
                     continue
                 seen.add(dedupe_key)
